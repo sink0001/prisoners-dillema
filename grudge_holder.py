@@ -1,6 +1,6 @@
 
 
-class Player2:
+class Grudge_holder:
     
     def move(self, opponent_previous_moves: list):
         '''
@@ -9,11 +9,15 @@ class Player2:
         if it has only been 1 move and the opponent defected he defects
         otherwise if the opponent is nice he is nice
         '''
-        if not opponent_previous_moves:
+        if len(opponent_previous_moves) == 0:
             return "corporate"
-        try:
-            if "defect" in opponent_previous_moves[0:1]:
-                return "defect"
-        except IndexError:
+        elif len(opponent_previous_moves) == 1:
             return opponent_previous_moves[0]
-        return "corporate"
+        elif "defect" in opponent_previous_moves[0:2]:
+            return "defect"
+        else:
+            return "corporate"
+    
+    @property
+    def name(self):
+        return "2 eyes for one"
