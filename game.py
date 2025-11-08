@@ -24,11 +24,6 @@ class Game:
         self.player2_score = 0
 
     def play(self, number_of_rounds: int) -> str:
-        '''
-        first play first round special behaviour
-        then play normally
-        return the number of points each player got
-        '''
         for r in range(0, number_of_rounds):
             player1_move = self.player1.move(self.player2_previous_moves, self.player1_previous_moves)
             self.player1_previous_moves = [player1_move] + self.player1_previous_moves[:4]
