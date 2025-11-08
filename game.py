@@ -1,5 +1,10 @@
-from grudge_holder import Grudge_holder
-from random_player import Random
+from players.grudge_holder import Grudge_holder
+from players.random_player import Random
+from players.revenger import Revenger
+from players.eye_for_eye import Eye_for_eye
+from players.evil import Evil
+from players.pushover import Pushover
+from players.interval_betrayer import Interval_betrayer
 '''
 outcomes
 1. A and B defect (both get 0 points)
@@ -25,10 +30,10 @@ class Game:
         return the number of points each player got
         '''
         for r in range(0, number_of_rounds):
-            player1_move = self.player1.move(self.player2_previous_moves)
-            self.player1_previous_moves = [player1_move] + self.player1_previous_moves
-            player2_move = self.player2.move(self.player1_previous_moves)
-            self.player2_previous_moves = [player2_move] + self.player2_previous_moves
+            player1_move = self.player1.move(self.player2_previous_moves, self.player1_previous_moves)
+            self.player1_previous_moves = [player1_move] + self.player1_previous_moves[:4]
+            player2_move = self.player2.move(self.player1_previous_moves, self.player2_previous_moves)
+            self.player2_previous_moves = [player2_move] + self.player2_previous_moves[:4]
 
             match (player1_move, player2_move):
                 case ("corporate", "corporate"):
@@ -47,7 +52,13 @@ class Game:
         return f"\n{self.player1.name} total: {self.player1_score}\n{self.player2.name} total: {self.player2_score}\nWinner: {self.player1.name if self.player1_score > self.player2_score else self.player2.name}"
 
 
-me = Grudge_holder()
-opp = Random()
-game1 = Game(me, opp)
+random_player = Random()
+grudge_holding_player = Grudge_holder()
+vengefull_player = Revenger()
+eye_for_eye_player = Eye_for_eye()
+evil_player = Evil()
+pushover_player = Pushover()
+betraying_player = Interval_betrayer()
+
+game1 = Game(evil_player, grudge_holding_player)
 print(game1.play(10000))
