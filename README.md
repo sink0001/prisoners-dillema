@@ -14,6 +14,7 @@ To add a new player strategy head to the players directory and simply add a play
 class Player_name:
     def move(self, opponent_previous_moves: list, own_previous_moves: list) -> str:
         # Note that the move lists have moves in descending order i.e. opponent_previous_moves[0] is the most recent move
+        return "string 'defect' or string 'corporate'"
     
     @property
     def name(self):
